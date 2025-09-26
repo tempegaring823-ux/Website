@@ -1,0 +1,357 @@
+/* Palet Warna & Font */
+:root {
+    --primary-color: #0A2342;
+    --accent-color: #FF7C00;
+    --light-gray: #E6E9EE;
+    --text-dark: #333;
+    --text-light: #f4f4f4;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #f4f7f9;
+    color: #333;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 15px 20px;
+    color: #ccc;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav a.active {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: 500;
+}
+
+.sidebar-nav a:not(.active):hover {
+    background-color: #061a33;
+    color: #fff;
+}
+
+.sidebar-nav a.logout {
+    margin-top: 50px;
+    background-color: #e74c3c;
+    color: white;
+    text-align: center;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 40px;
+}
+
+.main-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    color: #333;
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Summary Cards */
+.summary-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    flex: 1;
+    text-align: center;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.card-number {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 10px 0 0;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f0f3f6;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status-pending { color: var(--accent-color); }
+.status-approved { color: #3498db; }
+.status-in_progress { color: #8e44ad; }
+.status-completed { color: #27ae60; }
+.status-declined { color: #e74c3c; }
+
+/* Action Buttons */
+.action-form {
+    display: inline-block;
+    margin: 0 2px;
+}
+
+.action-form button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.action-form button.approve {
+    background-color: #3498db;
+}
+
+.action-form button.in_progress {
+    background-color: #8e44ad;
+}
+
+.action-form button.complete {
+    background-color: #27ae60;
+}
+
+.action-form button.decline, .action-form button.delete {
+    background-color: #e74c3c;
+}
+
+/* Tombol aksi edit & hapus */
+.btn-action {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-right: 5px; /* Tambahan jarak antar tombol */
+}
+.btn-action.edit {
+    background-color: #f39c12; /* oranye */
+}
+.btn-action.edit:hover {
+    background-color: #d68910;
+}
+.btn-action.delete {
+    background-color: #e74c3c; /* merah */
+}
+.btn-action.delete:hover {
+    background-color: #c0392b;
+}
+
+/* Form Styling - Khusus untuk halaman edit_user & add_user */
+.edit-container, .add-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.edit-container h2, .add-container h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.message-success {
+    color: #27ae60;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.message-error {
+    color: #e74c3c;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    text-align: left;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; 
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #061a33;
+}
+
+/* Responsive Layout untuk Dasbor Admin */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        position: static;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar-logo {
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+    .sidebar-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    .sidebar-nav a {
+        padding: 10px 15px;
+    }
+    .sidebar-nav a.logout {
+        margin-top: 10px;
+    }
+    .main-content {
+        padding: 20px 10px;
+    }
+    .summary-cards {
+        flex-direction: column;
+    }
+    table, th, td {
+        display: block;
+    }
+    table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    table tr {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        display: block;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    table td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        background-color: white;
+        border-bottom: 1px solid #eee;
+    }
+    table td:last-child {
+        border-bottom: none;
+    }
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+    .action-form button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}

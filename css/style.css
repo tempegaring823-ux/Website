@@ -1,0 +1,921 @@
+/* Palet Warna & Font */
+:root {
+    --primary-color: #0A2342;
+    --accent-color: #FF7C00;
+    --light-gray: #F0F2F5; /* Sedikit lebih lembut dari sebelumnya */
+    --text-dark: #333;
+    --text-light: #f4f4f4;
+}
+
+/* Pengaturan Dasar & Tipografi */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background-color: #FFFFFF; /* Ganti background utama jadi putih bersih */
+    color: var(--text-dark);
+}
+
+h1, h2, h3 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Tombol --- */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #e56b00;
+    transform: translateY(-3px);
+}
+
+.btn-contact {
+    background-color: var(--accent-color);
+    color: white;
+}
+.btn-contact:hover {
+    background-color: #e56b00;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+.btn-secondary:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* --- Header & Navigasi --- */
+.main-header {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'Oswald', sans-serif;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.nav-links a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+}
+.nav-links a:not(.btn)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+.nav-links a:hover:not(.btn)::after {
+    width: 100%;
+}
+
+/* Tombol Menu Hamburger (Mobile) */
+.menu-toggle {
+    display: none; /* Sembunyikan di desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+.menu-toggle .bar {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+/* Animasi Hamburger menjadi 'X' */
+.menu-toggle.is-active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle.is-active .bar:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.is-active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    height: 85vh; /* Sedikit lebih tinggi */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background: url('https://via.placeholder.com/1920x1080?text=Mobil+Kinclong') center center/cover no-repeat;
+}
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(0deg, rgba(10, 35, 66, 0.8) 0%, rgba(10, 35, 66, 0.5) 100%);
+}
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+.hero-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Memberi jarak antar tombol */
+    flex-wrap: wrap; /* Memastikan tombol turun ke bawah jika layar terlalu kecil */
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+    .hero-content p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+}
+
+/* --- Sections Styling --- */
+.page-title { /* Untuk judul di halaman galeri dan tentang kami */
+    text-align: center;
+    font-size: 2.8rem;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+.services-section, .gallery-section, .about-section, .pricing-section {
+    padding: 80px 0;
+}
+.services-section h2, .pricing-section h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 60px;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.service-card {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.service-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+.service-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+.gallery-item {
+    overflow: hidden;
+    border-radius: 10px;
+}
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* About Section */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.about-content img {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 10px;
+}
+.about-text h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+/* Pricing Section */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.price-card {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    text-align: center;
+    transition: transform 0.3s ease;
+    border: 2px solid var(--light-gray);
+}
+.price-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-color);
+}
+.price-card h3 {
+    font-size: 1.6em;
+}
+.price-card .price {
+    font-size: 2.8em;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 10px 0;
+}
+.price-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 25px 0;
+    text-align: left;
+}
+.price-card ul li {
+    margin-bottom: 12px;
+}
+.price-card ul li::before {
+    content: '✓';
+    color: #27ae60;
+    font-weight: bold;
+    display: inline-block;
+    width: 1.2em;
+}
+
+/* ################## STYLING FOOTER BARU ################## */
+
+.main-footer {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 60px 0 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column .footer-title {
+    font-size: 1.5em;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-column .footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.footer-column p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+}
+
+/* Styling Link Navigasi Footer */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 12px;
+}
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+.footer-links a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
+/* Styling Info Kontak */
+.footer-contact-info {
+    list-style: none;
+    padding: 0;
+}
+.footer-contact-info li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+.footer-contact-info i {
+    color: var(--accent-color);
+    font-size: 1.1em;
+    margin-right: 15px;
+    margin-top: 5px;
+    width: 20px;
+    text-align: center;
+}
+.footer-contact-info a,
+.footer-contact-info span {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    flex: 1;
+}
+.footer-contact-info a:hover {
+    color: var(--accent-color);
+}
+
+/* Styling Ikon Media Sosial */
+.footer-socials {
+    margin-top: 20px;
+}
+.footer-socials a {
+    color: white;
+    font-size: 1.8em;
+    margin-right: 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.footer-socials a:hover {
+    color: var(--accent-color);
+}
+
+/* Styling Peta */
+.footer-map {
+    margin-top: 20px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-column .footer-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .footer-contact-info li {
+        justify-content: center;
+        text-align: left;
+    }
+}
+
+/* ################## STYLING UNTUK HALAMAN PHP (LOGIN, DASHBOARD, DLL) ################## */
+
+/* --- Container Form Login & Register --- */
+.auth-form-container {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+.auth-form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Grup Form (Label & Input) */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 124, 0, 0.2);
+}
+
+/* Tombol Submit Form */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-submit:hover {
+    background-color: #061a33;
+}
+
+/* Pesan Error/Sukses */
+.message-error { color: #e74c3c; text-align: center; margin-bottom: 15px; }
+.message-success { color: #27ae60; text-align: center; margin-bottom: 15px; }
+
+
+/* --- Halaman Booking --- */
+.booking-section {
+    padding: 60px 0;
+    background-color: var(--light-gray);
+}
+.booking-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+.datetime-picker-container {
+    display: flex;
+    gap: 15px;
+}
+.datetime-picker-container > * {
+    flex: 1;
+}
+/* --- Dashboard Pengguna --- */
+.dashboard-content {
+    padding: 60px 20px;
+    text-align: center;
+}
+.dashboard-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+.user-bookings {
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: left;
+    overflow-x: auto; /* Agar tabel bisa di-scroll horizontal di mobile */
+}
+.user-bookings h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+.user-bookings table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.user-bookings th, .user-bookings td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.user-bookings th {
+    background-color: var(--light-gray);
+    font-weight: 500;
+}
+.user-bookings a {
+    color: var(--accent-color);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* --- Halaman Status Pesanan --- */
+.status-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+.status-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.status-info p {
+    margin: 15px 0;
+    font-size: 1.1em;
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 15px;
+}
+.status-info span {
+    font-weight: 500;
+    color: var(--primary-color);
+}
+.status-text {
+    font-size: 1em;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 5px;
+    color: white;
+    text-transform: capitalize;
+}
+.status-pending { background-color: #f39c12; }
+.status-approved { background-color: #3498db; }
+.status-in_progress { background-color: #8e44ad; }
+.status-completed { background-color: #27ae60; }
+.status-declined { background-color: #e74c3c; }
+
+
+/* ################## PENYESUAIAN RESPONSIVE UNTUK HALAMAN PHP ################## */
+@media (max-width: 768px) {
+    /* Form Login, Register, Booking, Status dibuat lebih pas di mobile */
+    .auth-form-container,
+    .booking-form-container,
+    .status-container {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 25px;
+    }
+
+    .dashboard-content h1 {
+        font-size: 2rem;
+    }
+
+    .datetime-picker-container {
+        flex-direction: column; /* Susun input tanggal dan jam ke bawah */
+    }
+
+    /* Penyesuaian tabel di dashboard agar tidak pecah */
+    .user-bookings th, .user-bookings td {
+        padding: 12px 8px; /* Padding lebih kecil */
+        font-size: 0.9em; /* Font lebih kecil */
+    }
+}
+
+/* ################## STYLING UNTUK HALAMAN HARGA (PRICING.HTML) ################## */
+
+.pricing-page-section {
+    padding: 60px 0 100px; /* Tambahkan padding bottom lebih besar */
+    background-color: var(--light-gray);
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 60px;
+    max-width: 700px; /* Lebarkan sedikit */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.price-category {
+    margin-bottom: 80px; /* Tingkatkan margin bottom antar kategori */
+}
+
+.price-category h2 {
+    font-size: 2rem;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    display: inline-block;
+    color: var(--primary-color); /* Pastikan warnanya konsisten */
+}
+
+.price-category h2 i {
+    margin-right: 15px;
+    color: var(--accent-color); /* Icon juga dikasih warna accent */
+}
+
+.category-note {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 30px;
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color);
+}
+
+.price-card .price-description {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 15px;
+    min-height: 40px; /* Agar tinggi deskripsi seragam */
+}
+
+/* Kategori ukuran mobil */
+.car-size-info {
+    margin-top: 50px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+.car-size-info h3 {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.car-size-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Agar responsif di mobile */
+    gap: 20px;
+}
+.car-size-info ul li {
+    flex-basis: 30%; /* Untuk 3 kolom */
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+.car-size-info ul li i {
+    color: var(--accent-color);
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+.car-size-info .note {
+    text-align: center;
+    margin-top: 30px;
+    font-style: italic;
+    color: #888;
+}
+
+/* Deskripsi item harga */
+.price-includes {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-top: 1px solid var(--light-gray);
+    padding-top: 15px;
+}
+.price-includes h4 {
+    font-size: 1.1em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+.price-includes ul {
+    list-style: none;
+    padding: 0;
+}
+.price-includes ul li {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 5px;
+}
+.price-includes ul li::before {
+    content: '•'; /* Menggunakan bullet point sederhana */
+    color: var(--accent-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.price-card .price-list {
+    list-style: none;
+    padding: 0;
+    margin: 25px 0 0; /* Sesuaikan margin agar tidak terlalu mepet footer card */
+    text-align: left;
+}
+.price-card .price-list li {
+    margin-bottom: 12px;
+}
+.price-card .price-list li::before {
+    content: '✓';
+    color: #27ae60;
+    font-weight: bold;
+    display: inline-block;
+    width: 1.2em;
+}
+
+.price-card.popular {
+    position: relative;
+    border-color: var(--accent-color);
+    transform: scale(1.05); /* Menonjolkan kartu populer */
+}
+
+.popular-badge {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 5px 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Penyesuaian ikon centang pada daftar harga */
+.price-card ul li i.fa-check {
+    color: #27ae60;
+    margin-right: 8px;
+}
+
+/* Responsive untuk halaman harga */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.2rem;
+    }
+    .price-card.popular {
+        transform: scale(1); /* Hilangkan efek scale di mobile agar tidak terlalu besar */
+    }
+    .car-size-info ul {
+        flex-direction: column; /* Susun ke bawah di mobile */
+    }
+    .car-size-info ul li {
+        flex-basis: 100%;
+        text-align: left;
+    }
+}
+
+/* Responsive untuk halaman harga */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.2rem;
+    }
+    .price-card.popular {
+        transform: scale(1); /* Hilangkan efek scale di mobile agar tidak terlalu besar */
+    }
+}
+
+/* ################## MEDIA QUERIES (RESPONSIVE) ################## */
+
+/* Tablet (max-width: 992px) */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-text {
+        text-align: left;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Tampilkan tombol hamburger */
+    }
+
+    .nav-links {
+        display: none; /* Sembunyikan navigasi di desktop */
+        position: absolute;
+        top: 70px; /* Di bawah header */
+        right: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid var(--light-gray);
+    }
+    .nav-links.active {
+        display: flex; /* Tampilkan saat menu aktif */
+    }
+    .nav-links a {
+        padding: 15px 0;
+        width: 100%;
+        text-align: center;
+    }
+    .nav-links a:not(.btn)::after {
+        display: none; /* Hilangkan efek hover underline di mobile */
+    }
+    .nav-links a.btn {
+        margin-top: 15px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .services-grid, .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
