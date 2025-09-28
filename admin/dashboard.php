@@ -22,10 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && isset($_P
 
     if ($action == 'approve') {
         $new_status = 'approved';
-    } elseif ($action == 'in_progress') {
-        $new_status = 'in_progress';
-    } elseif ($action == 'complete') {
-        $new_status = 'completed';
     } elseif ($action == 'decline') {
         $new_status = 'declined';
     }
@@ -62,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user']) && isse
 $users_sql = "SELECT users.id, users.name, users.email, roles.role_name, users.created_at FROM users JOIN roles ON users.role_id = roles.id";
 $users_result = $conn->query($users_sql);
 
+// Query untuk mengambil data booking, termasuk nomor telepon
 $bookings_sql = "SELECT bookings.*, users.name as user_name FROM bookings JOIN users ON bookings.user_id = users.id ORDER BY created_at DESC";
 $bookings_result = $conn->query($bookings_sql);
 
@@ -130,8 +127,9 @@ $total_users = $total_users_result->fetch_assoc()['total_users'];
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>ID Akun</th>
                             <th>Nama Pengguna</th>
+                            <th>Nomor Telepon</th>
                             <th>Layanan</th>
                             <th>Tanggal Booking</th>
                             <th>Status</th>
@@ -143,47 +141,35 @@ $total_users = $total_users_result->fetch_assoc()['total_users'];
                         if ($bookings_result->num_rows > 0) {
                             while($row = $bookings_result->fetch_assoc()) {
                                 echo "<tr>";
-                                echo "<td data-label='ID'>#" . $row['id'] . "</td>";
+                                echo "<td data-label='ID Akun'>#" . $row['user_id'] . "</td>";
                                 echo "<td data-label='Nama Pengguna'>" . htmlspecialchars($row['user_name']) . "</td>";
+                                echo "<td data-label='Nomor Telepon'>" . htmlspecialchars($row['phone']) . "</td>";
                                 echo "<td data-label='Layanan'>" . htmlspecialchars($row['service']) . "</td>";
                                 echo "<td data-label='Tanggal Booking'>" . htmlspecialchars($row['booking_date']) . "</td>";
                                 echo "<td data-label='Status' class='status-" . htmlspecialchars($row['status']) . "'>" . ucwords(htmlspecialchars($row['status'])) . "</td>";
                                 echo "<td data-label='Aksi'>";
                                 
                                 if ($row['status'] == 'pending') {
-                                    // Button Approve
                                     echo "<form action='dashboard.php' method='POST' class='action-form'>";
                                     echo "<input type='hidden' name='booking_id' value='" . $row['id'] . "'>";
                                     echo "<input type='hidden' name='action' value='approve'>";
-                                    echo "<button type='submit' class='approve'>Terima</button>"; // Removed btn-action, added approve
+                                    echo "<button type='submit' class='approve'>Terima</button>";
                                     echo "</form>";
                                                                 
-                                    // Button Tolak (Decline)
                                     echo "<form action='dashboard.php' method='POST' class='action-form'>";
                                     echo "<input type='hidden' name='booking_id' value='" . $row['id'] . "'>";
                                     echo "<input type='hidden' name='action' value='decline'>";
-                                    echo "<button type='submit' class='decline'>Tolak</button>"; // Removed btn-action, added decline
+                                    echo "<button type='submit' class='decline'>Tolak</button>";
                                     echo "</form>";
                                                                 
-                                } elseif ($row['status'] == 'approved') {
-                                    echo "<form action='dashboard.php' method='POST' class='action-form'>";
-                                    echo "<input type='hidden' name='booking_id' value='" . $row['id'] . "'>";
-                                    echo "<input type='hidden' name='action' value='in_progress'>";
-                                    echo "<button type='submit' class='in_progress'>Kerjakan</button>";
-                                    echo "</form>";
-                                
-                                } elseif ($row['status'] == 'in_progress') {
-                                    echo "<form action='dashboard.php' method='POST' class='action-form'>";
-                                    echo "<input type='hidden' name='booking_id' value='" . $row['id'] . "'>";
-                                    echo "<input type='hidden' name='action' value='complete'>";
-                                    echo "<button type='submit' class='complete'>Selesai</button>";
-                                    echo "</form>";
+                                } else {
+                                    echo "<span>Sudah diproses</span>";
                                 }
                                 echo "</td>";
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='6'>Tidak ada data booking.</td></tr>";
+                            echo "<tr><td colspan='7'>Tidak ada data booking.</td></tr>";
                         }
                         ?>
                     </tbody>

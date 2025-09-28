@@ -77,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
 <body>
 
     <div class="dashboard-container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <h2 class="sidebar-logo">Admin Panel</h2>
             <nav class="sidebar-nav">
@@ -88,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
             </nav>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <header class="main-header">
                 <h1>Edit Pengguna</h1>
@@ -119,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
                             <select id="role_id" name="role_id">
                                 <option value="1" <?php if ($user_data['role_id'] == 1) echo 'selected'; ?>>User</option>
                                 <option value="2" <?php if ($user_data['role_id'] == 2) echo 'selected'; ?>>Admin</option>
-                            </select>
+                                <option value="3" <?php if ($user_data['role_id'] == 3) echo 'selected'; ?>>Teknisi</option> </select>
                         </div>
 
                         <div class="form-group">

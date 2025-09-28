@@ -21,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_role'] = $row['role_id'];
             if ($row['role_id'] == 2) {
                 header("Location: admin/dashboard.php");
+            } elseif ($row['role_id'] == 3) { // Tambahan untuk Teknisi
+                header("Location: technician/dashboard.php");
             } else {
                 header("Location: user/dashboard.php");
             }
