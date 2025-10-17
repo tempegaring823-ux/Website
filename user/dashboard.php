@@ -68,7 +68,6 @@ $bookings_result = $stmt->get_result();
                             echo "<td>" . htmlspecialchars($row['service']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['booking_date']) . "</td>";
                             echo "<td>" . date('d-m-Y', strtotime($row['created_at'])) . "</td>";
-                            // Tautan ke halaman status.php
                             echo "<td><a href='status.php?id=" . $row['id'] . "'>Lihat Status</a></td>";
                             echo "</tr>";
                         }

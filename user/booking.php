@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = $_POST['phone'];
     $service = $_POST['service'];
     
-    // Gabungkan tanggal dan jam menjadi format DATETIME yang benar
     $booking_datetime = $_POST['date'] . ' ' . $_POST['time'];
     $notes = $_POST['notes'];
 

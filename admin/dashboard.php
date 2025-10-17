@@ -2,19 +2,19 @@
 session_start();
 require '../db/config.php';
 
-// Verifikasi: Pastikan pengguna sudah login dan merupakan admin (role_id 2)
+
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 2) {
     header("Location: ../login.php");
     exit();
 }
 
-// Tentukan bagian yang aktif dari URL (misal: #bookings)
+
 $current_anchor = 'dashboard';
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '#') !== false) {
     $current_anchor = substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '#') + 1);
 }
 
-// Logika untuk memproses perubahan status booking
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && isset($_POST['booking_id'])) {
     $booking_id = $_POST['booking_id'];
     $action = $_POST['action'];
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && isset($_P
     }
 }
 
-// Logika untuk menghapus pengguna
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user']) && isset($_POST['user_id'])) {
     $user_id_to_delete = $_POST['user_id'];
     
@@ -54,25 +54,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user']) && isse
 }
 
 
-// Ambil data dari database untuk dashboard
+
 $users_sql = "SELECT users.id, users.name, users.email, roles.role_name, users.created_at FROM users JOIN roles ON users.role_id = roles.id";
 $users_result = $conn->query($users_sql);
 
-// Query untuk mengambil data booking, termasuk nomor telepon
 $bookings_sql = "SELECT bookings.*, users.name as user_name FROM bookings JOIN users ON bookings.user_id = users.id ORDER BY created_at DESC";
 $bookings_result = $conn->query($bookings_sql);
 
-// Hitung total booking
+
 $total_bookings_sql = "SELECT COUNT(*) as total FROM bookings";
 $total_bookings_result = $conn->query($total_bookings_sql);
 $total_bookings = $total_bookings_result->fetch_assoc()['total'];
 
-// Hitung booking hari ini
+
 $today_bookings_sql = "SELECT COUNT(*) as today FROM bookings WHERE DATE(created_at) = CURDATE()";
 $today_bookings_result = $conn->query($today_bookings_sql);
 $today_bookings = $today_bookings_result->fetch_assoc()['today'];
 
-// Hitung total pengguna
 $total_users_sql = "SELECT COUNT(*) as total_users FROM users";
 $total_users_result = $conn->query($total_users_sql);
 $total_users = $total_users_result->fetch_assoc()['total_users'];
@@ -203,9 +201,9 @@ $total_users = $total_users_result->fetch_assoc()['total_users'];
                                 echo "<td data-label='Peran'>" . htmlspecialchars($row['role_name']) . "</td>";
                                 echo "<td data-label='Tanggal Daftar'>" . htmlspecialchars($row['created_at']) . "</td>";
                                 echo "<td data-label='Aksi'>";
-                                // Tombol Edit
+
                                 echo "<a href='edit_user.php?id=" . $row['id'] . "' class='btn-action edit'>Edit</a>";
-                                // Tombol Hapus
+
                                 echo "<form action='dashboard.php#users' method='POST' style='display:inline;' onsubmit='return confirm(\"Apakah Anda yakin ingin menghapus akun ini?\");'>";
                                 echo "<input type='hidden' name='user_id' value='" . $row['id'] . "'>";
                                 echo "<input type='hidden' name='delete_user' value='1'>";

@@ -9,7 +9,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $password_confirm = $_POST['password_confirm'];
 
-    if ($password !== $password_confirm) {
+    // --- Cek duplikasi email ---
+    $check_stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $check_stmt->bind_param("s", $email);
+    $check_stmt->execute();
+    $check_result = $check_stmt->get_result();
+    
+    if ($check_result->num_rows > 0) {
+        $message = "Error: Email ini sudah terdaftar. Silakan gunakan email lain atau login.";
+        $check_stmt->close();
+    } elseif ($password !== $password_confirm) {
         $message = "Error: Password dan konfirmasi password tidak cocok.";
     } else {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -33,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -55,9 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </button>
             
             <div class="nav-links" id="nav-links">
-                <a href="index.html">Beranda</a>
-                <a href="services.html">Layanan</a>
-                <a href="gallery.html">Portofolio</a>
+                <a href="index.php">Beranda</a>
+                <a href="services.php">Layanan</a>
+                <a href="pricing.php">Harga</a>
+                <a href="gallery.php">Portofolio</a>
                 <a href="login.php" class="btn btn-contact">Login</a>
             </div>
         </nav>

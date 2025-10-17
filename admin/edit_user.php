@@ -2,7 +2,7 @@
 session_start();
 require '../db/config.php';
 
-// Verifikasi: Pastikan pengguna sudah login dan merupakan admin
+
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 2) {
     header("Location: ../login.php");
     exit();
@@ -12,7 +12,7 @@ $user_id = null;
 $user_data = null;
 $message = '';
 
-// Logika untuk menampilkan formulir (saat halaman pertama kali diakses)
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
     $user_id = $_GET['id'];
     
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
     $stmt->close();
 }
 
-// Logika untuk memproses formulir (saat dikirim)
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
     $user_id = $_POST['user_id'];
     $name = $_POST['name'];
@@ -37,14 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
     $role_id = $_POST['role_id'];
     $password = $_POST['password'];
 
-    // Update data pengguna
+
     if (!empty($password)) {
-        // Update password jika ada input baru
+
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, role_id = ?, password = ? WHERE id = ?");
         $stmt->bind_param("ssisi", $name, $email, $role_id, $hashed_password, $user_id);
     } else {
-        // Jangan update password jika kosong
+
         $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, role_id = ? WHERE id = ?");
         $stmt->bind_param("ssii", $name, $email, $role_id, $user_id);
     }
@@ -56,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
     }
     $stmt->close();
     
-    // Setelah update, ambil kembali data terbaru
     $stmt = $conn->prepare("SELECT users.*, roles.role_name FROM users JOIN roles ON users.role_id = roles.id WHERE users.id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();

@@ -2,7 +2,7 @@
 session_start();
 require '../db/config.php';
 
-// Verifikasi: Pastikan pengguna sudah login dan merupakan admin (role_id 2)
+
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 2) {
     header("Location: ../login.php");
     exit();
@@ -10,17 +10,28 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 2) {
 
 $message = '';
 
-// Logika untuk memproses formulir (saat dikirim)
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $role_id = $_POST['role_id'];
     $password = $_POST['password'];
 
-    if (empty($name) || empty($email) || empty($password)) {
+
+    $check_stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $check_stmt->bind_param("s", $email);
+    $check_stmt->execute();
+    $check_result = $check_stmt->get_result();
+    
+
+    if ($check_result->num_rows > 0) {
+       
+        $message = "Error: Email ini sudah terdaftar. Silakan gunakan email lain.";
+    } elseif (empty($name) || empty($email) || empty($password)) {
+        
         $message = "Error: Nama, email, dan password harus diisi.";
     } else {
-
+      
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $conn->prepare("INSERT INTO users (name, email, password, role_id) VALUES (?, ?, ?, ?)");
@@ -33,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         $stmt->close();
     }
+
+    $check_stmt->close();
 }
 ?>
 
@@ -46,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <h2 class="sidebar-logo">Admin Panel</h2>
             <nav class="sidebar-nav">
@@ -56,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a href="../logout.php" class="nav-item logout">Logout</a>
             </nav>
         </div>
-        <!-- Main Content -->
         <div class="main-content">
             <header class="main-header">
                 <h1>Tambah Pengguna</h1>
@@ -81,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <select id="role_id" name="role_id">
                             <option value="1">User</option>
                             <option value="2">Admin</option>
+                            <option value="3">Teknisi</option>
                         </select>
                     </div>
 

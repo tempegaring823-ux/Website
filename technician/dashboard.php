@@ -2,13 +2,12 @@
 session_start();
 require '../db/config.php';
 
-// Verifikasi: Pastikan pengguna sudah login dan merupakan teknisi (role_id 3)
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 3) {
     header("Location: ../login.php");
     exit();
 }
 
-// Logika untuk memproses perubahan status booking oleh teknisi
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && isset($_POST['booking_id'])) {
     $booking_id = $_POST['booking_id'];
     $action = $_POST['action'];
@@ -31,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && isset($_P
     }
 }
 
-// Ambil data booking yang sudah disetujui atau sedang dikerjakan
 $bookings_sql = "SELECT bookings.*, users.name as user_name FROM bookings JOIN users ON bookings.user_id = users.id WHERE bookings.status IN ('approved', 'in_progress') ORDER BY created_at DESC";
 $bookings_result = $conn->query($bookings_sql);
 

@@ -28,10 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             exit();
         } else {
-            $message = "Email atau password salah.";
+            $message = "Error: Email atau password salah.";
         }
     } else {
-        $message = "Email atau password salah.";
+        $message = "Error: Email atau password salah.";
     }
     $stmt->close();
 }
@@ -58,9 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </button>
             
             <div class="nav-links" id="nav-links">
-                <a href="index.html">Beranda</a>
-                <a href="services.html">Layanan</a>
-                <a href="gallery.html">Portofolio</a>
+                <a href="index.php">Beranda</a>
+                <a href="services.php">Layanan</a>
+                <a href="pricing.php">Harga</a>
+                <a href="gallery.php">Portofolio</a>
                 <a href="login.php" class="btn btn-contact">Login</a>
             </div>
         </nav>
