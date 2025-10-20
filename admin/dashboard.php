@@ -94,6 +94,7 @@ $total_users = $total_users_result->fetch_assoc()['total_users'];
                 <a href="#dashboard" class="nav-item <?php echo ($current_anchor == 'dashboard' ? 'active' : ''); ?>">Dashboard</a>
                 <a href="#bookings" class="nav-item <?php echo ($current_anchor == 'bookings' ? 'active' : ''); ?>">Kelola Booking</a>
                 <a href="#users" class="nav-item <?php echo ($current_anchor == 'users' ? 'active' : ''); ?>">Kelola Akun</a>
+                <a href="hasil_sus.php" class="nav-item">Hasil SUS</a>
                 <a href="../logout.php" class="nav-item logout">Logout</a>
             </nav>
         </div>

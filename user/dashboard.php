@@ -47,6 +47,8 @@ $bookings_result = $stmt->get_result();
         <!-- Tombol Booking dipindahkan ke dalam section -->
         <div style="margin-top: 20px;">
             <a href="booking.php" class="btn btn-primary">Booking Sekarang</a>
+            <a href="pertanyaan_sus.php" class="btn btn-primary">Umpan Balik (Kuesioner SUS)</a>
+
         </div>
 
         <div class="user-bookings">
